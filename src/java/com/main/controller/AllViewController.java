@@ -292,7 +292,7 @@ public class AllViewController {
     @RequestMapping("viewCustomerInvoice")
     public ModelAndView viewCustomerInsuranceInvoice(@RequestParam(value = "invoiceid") String invoiceId) {
         ModelAndView modelAndView = new ModelAndView("ViewCustomerInsuranceInvoice");
-        modelAndView.addObject("vatDetails", viewService.getanyhqldatalist("from taxes where isdelete<>'Yes' and id in('LTX1','LTX2')"));
+//        modelAndView.addObject("vatDetails", viewService.getanyhqldatalist("from taxes where isdelete<>'Yes' and id in('LTX1','LTX2')"));
 
         //view invoice data required for getting data
         List<Map<Object, String>> invoicemap = viewService.getanyjdbcdatalist("SELECT iv.*,bd.vehiclename,bdd.name as make\n"

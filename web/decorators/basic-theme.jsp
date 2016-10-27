@@ -27,6 +27,7 @@
                             <li><a href="viewCustomerDetailsLink?customerid=${sessionScope.CUSTOMERID}">Service History</a></li>
                             <li><a href="viewCustomerProfileLink?customerid=${sessionScope.CUSTOMERID}">Profile</a></li>
                             <li><a href="viewCustomerCheckList?customerid=${sessionScope.CUSTOMERID}">CheckList</a></li>
+                            <li><a href="fbgridLink?customerid=${sessionScope.CUSTOMERID}">Feedback</a></li>
                             
                             <table width="70" class="settings-right">
                                 <tr>

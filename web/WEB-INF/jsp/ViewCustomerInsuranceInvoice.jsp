@@ -20,8 +20,7 @@
                 actnumber = numReversed.reverse();
                 if (Number(junkVal) >= 0) {
                     //do nothing
-                }
-                else {
+                } else {
                     alert('wrong Number cannot be converted');
                     return false;
                 }
@@ -47,8 +46,7 @@
                         case 0:
                             if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
                                 inWords[j] = '';
-                            }
-                            else {
+                            } else {
                                 inWords[j] = iWords[actnumber[i]];
                             }
                             inWords[j] = inWords[j];
@@ -59,19 +57,16 @@
                         case 2:
                             if (actnumber[i] == 0) {
                                 inWords[j] = '';
-                            }
-                            else if (actnumber[i - 1] != 0 && actnumber[i - 2] != 0) {
+                            } else if (actnumber[i - 1] != 0 && actnumber[i - 2] != 0) {
                                 inWords[j] = iWords[actnumber[i]] + ' Hundred and';
-                            }
-                            else {
+                            } else {
                                 inWords[j] = iWords[actnumber[i]] + ' Hundred';
                             }
                             break;
                         case 3:
                             if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
                                 inWords[j] = '';
-                            }
-                            else {
+                            } else {
                                 inWords[j] = iWords[actnumber[i]];
                             }
                             if (actnumber[i + 1] != 0 || actnumber[i] > 0) { //here
@@ -84,8 +79,7 @@
                         case 5:
                             if (actnumber[i] == "0" || actnumber[i + 1] == 1) {
                                 inWords[j] = '';
-                            }
-                            else {
+                            } else {
                                 inWords[j] = iWords[actnumber[i]];
                             }
                             if (actnumber[i + 1] != 0 || actnumber[i] > 0) {   //here 
@@ -98,8 +92,7 @@
                         case 7:
                             if (actnumber[i] == "0" || actnumber[i + 1] == 1) {
                                 inWords[j] = '';
-                            }
-                            else {
+                            } else {
                                 inWords[j] = iWords[actnumber[i]];
                             }
                             if (actnumber[i + 1] != 0 || actnumber[i] > 0) { // changed here
@@ -117,11 +110,9 @@
                 function tens_complication() {
                     if (actnumber[i] == 0) {
                         inWords[j] = '';
-                    }
-                    else if (actnumber[i] == 1) {
+                    } else if (actnumber[i] == 1) {
                         inWords[j] = ePlace[actnumber[i - 1]];
-                    }
-                    else {
+                    } else {
                         inWords[j] = tensPlace[actnumber[i]];
                     }
                 }
@@ -143,14 +134,12 @@
                     val = val.substring(val.indexOf('.') + 1, val.length);
                     if (val == '0' || val == '00') {
                         finalWord2 = "zero paisa only";
-                    }
-                    else {
+                    } else {
                         document.getElementById('amttotal').value = val;
                         finalWord2 = test_value() + " paisa only";
                     }
                     document.getElementById('finalamtwords').innerHTML = finalWord1 + " Rupees and " + finalWord2;
-                }
-                else {
+                } else {
                     //finalWord2 =  " Zero paisa only";
                     document.getElementById('finalamtwords').innerHTML = finalWord1 + " Rupees Only";
                 }
@@ -167,11 +156,11 @@
                 $("#senturmail").hide();
                 $("#sendError").hide();
                 convert_amount_into_amttotal_paisa();
-                
+
                 //code written to display mail comment box begin here
-                $(".mailclick").click(function (e){
+                $(".mailclick").click(function (e) {
                     e.preventDefault();
-                    
+
 //                    var invoicehistoryid = $(this).attr('href');
                     $("#dialogmailDetail").dialog({
                         modal: true,
@@ -189,7 +178,7 @@
                     $("#sendcomments").prop("disabled", false);
                 });
                 //code written to display mail comment box ends! here
-                
+
                 //code written here to show payment history begins here
                 $(".paymenthistory").click(function (e) {
                     e.preventDefault();
@@ -223,10 +212,10 @@
                             });
                         }
                     });
-                });                
+                });
                 //code written here to show payment history ends! here
-                
-                
+
+
             });
             //calls print function
             function CallPrint(strid) {
@@ -245,7 +234,7 @@
                 prtContent.innerHTML = strOldOne;
             }
             //calls convert to pdf function
-                      
+
             //mod print function begin here
             function printContent(el) {
                 var restorepage = document.body.innerHTML;
@@ -257,7 +246,7 @@
             //mod print function ends! here
 
             //mod send mail function to test written on 06-11-2015 begins here
-            function convertHTMLtopdf() { 
+            function convertHTMLtopdf() {
                 $("#sendcomments").prop("disabled", true);
                 $("#senturmail").hide();
                 $("#sendError").hide();
@@ -284,39 +273,39 @@
                             'width': margins.width, // max width of content on PDF
                             'elementHandlers': specialElementHandlers
                         },
-                function (dispose) {
-                    // dispose: object with X, Y of the last line add to the PDF 
-                    //          this allow the insertion of new lines after html
-                    // Making Data URI
-                    var out = pdf.output('datauristring');
-                    //ajax call to send mail begin here
-                    var customerName = $("#customername").val();
-                    var customerEmail = $("#customeremail").val();
-                    var emailComments = $("#comments").val();
-                    $.ajax({
-                        url: "sendmailinfo",
-                        type: 'POST',
-                        data: {
-                            customerName: customerName,
-                            customerEmail: customerEmail,
-                            mypdfbase: out,
-                            emailcomments: emailComments
-                        },
-                        cache: false,
-                        success: function (data) {
-                            $("#dialogmailDetail").dialog("close");
-                            if (data === 'Yes') {
-                                $("#send").hide();
-                                $("#senturmail").show();
-                            } else {
-                                $("#sendError").show();
-                            }
-                        }, error: function () {
-                            alert("i m err");
-                        }
-                    });
-                    //ajax call to send mail ends!! here
-                }, margins);
+                        function (dispose) {
+                            // dispose: object with X, Y of the last line add to the PDF 
+                            //          this allow the insertion of new lines after html
+                            // Making Data URI
+                            var out = pdf.output('datauristring');
+                            //ajax call to send mail begin here
+                            var customerName = $("#customername").val();
+                            var customerEmail = $("#customeremail").val();
+                            var emailComments = $("#comments").val();
+                            $.ajax({
+                                url: "sendmailinfo",
+                                type: 'POST',
+                                data: {
+                                    customerName: customerName,
+                                    customerEmail: customerEmail,
+                                    mypdfbase: out,
+                                    emailcomments: emailComments
+                                },
+                                cache: false,
+                                success: function (data) {
+                                    $("#dialogmailDetail").dialog("close");
+                                    if (data === 'Yes') {
+                                        $("#send").hide();
+                                        $("#senturmail").show();
+                                    } else {
+                                        $("#sendError").show();
+                                    }
+                                }, error: function () {
+                                    alert("i m err");
+                                }
+                            });
+                            //ajax call to send mail ends!! here
+                        }, margins);
             }
             //mod send mail function to test written on 06-11-2015 ends!! here
 
@@ -346,7 +335,7 @@
 
 
         <a href="#" class="view button-001 mailclick">Send Mail</a>  <a href="viewCustomerDetailsLink?customerid=${sessionScope.CUSTOMERID}" class="view button-001">Back</a><a href="#" class="view button-001" onclick="printContent('printdiv')">Print</a>
-                 
+
         <label id="send"><h2>Sending mail <img src="images/ajax-loader.gif" alt="loader View"></h2></label><label id="senturmail"><h2>Mail sent successfully <img src="images/MB__mail_icon.png" alt="loader View"></h2></label><label id="sendError"><h2>Please Check Your Connectivity</h2></label>
         <h2>Invoice</h2>
         <div id="testcase">
@@ -560,24 +549,18 @@
                                         <td align="right">&nbsp;</td>
                                     </tr>                                
                                 </c:if>
-                                <c:set value="1" var="count"></c:set>
-                                <c:forEach var="obva" items="${vatDetails}">
-                                    <tr>
-                                        <td width="6%">&nbsp;</td>
-                                        <td width="24%">&nbsp;</td>
-                                        <c:choose>
-                                            <c:when test="${count==1}">
-                                                <td width="11%" align="right"><strong>Add ${obva.name} @ ${obva.percent}%</strong></td>
-                                                <td width="14%" align="right"><strong><div id="${count}"> ${invoiceDt.taxAmount1}</div></strong></td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                <td width="11%" align="right"><strong>Add ${obva.name} @ ${obva.percent}%</strong></td>
-                                                <td width="14%" align="right"><strong><div id="me2"> ${invoiceDt.taxAmount2}</div></strong></td>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                    </tr>
-                                    <c:set value="${count+1}" var="count"></c:set>
-                                </c:forEach>
+                                <tr>
+                                    <td width="6%">&nbsp;</td>
+                                    <td width="24%">&nbsp;</td>
+                                    <td width="11%" align="right"><strong>Add VAT @ ${invoiceDt.taxpercent1}%</strong></td>
+                                    <td width="14%" align="right"><strong><div id="1"> ${invoiceDt.taxAmount1}</div></strong></td>
+                                </tr>
+                                <tr>
+                                    <td width="6%">&nbsp;</td>
+                                    <td width="24%">&nbsp;</td>
+                                    <td width="11%" align="right"><strong>Add SERVICE TAX @ ${invoiceDt.taxpercent2}%</strong></td>
+                                    <td width="14%" align="right"><strong><div id="me2"> ${invoiceDt.taxAmount2}</div></strong></td>
+                                </tr>
                                 <tr>
                                     <!--<td >&nbsp;</td>-->
                                     <td>&nbsp;</td>

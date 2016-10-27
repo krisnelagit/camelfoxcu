@@ -77,7 +77,7 @@
                         </td>
                         <td align="left"> 
                             <a href="viewServiceCheckList.html?id=${ob.id}&bdid=${ob.brandid}"><img src="images/view.png" width="21" height="13" title="View Service CheckList" />&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                
+                            <a href="trackCarStatus?id=${ob.id}&custid=${param.customerid}"><img src="images/eye-tracking.png" width="21" height="18" title="Process status" /></a>
                         </td>
                     </tr>  
                     <c:set value="${count+1}" var="count"></c:set>
@@ -85,7 +85,5 @@
 
             </tbody>
         </table>
-
-
     </body>
 </html>
